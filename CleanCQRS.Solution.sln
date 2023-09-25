@@ -5,6 +5,10 @@ VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanCQRS", "CleanCQRS\CleanCQRS.csproj", "{653824DF-D08B-442D-8432-49086D568FE4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "examples", "examples", "{F20FD72C-705A-42DA-A625-F91C81D01E3E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MinimalSetup", "Examples\MinimalSetup\MinimalSetup.csproj", "{BC5FE640-0CFE-45D1-8676-476E54BEFAC9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,9 +19,16 @@ Global
 		{653824DF-D08B-442D-8432-49086D568FE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{653824DF-D08B-442D-8432-49086D568FE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{653824DF-D08B-442D-8432-49086D568FE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC5FE640-0CFE-45D1-8676-476E54BEFAC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC5FE640-0CFE-45D1-8676-476E54BEFAC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC5FE640-0CFE-45D1-8676-476E54BEFAC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC5FE640-0CFE-45D1-8676-476E54BEFAC9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BC5FE640-0CFE-45D1-8676-476E54BEFAC9} = {F20FD72C-705A-42DA-A625-F91C81D01E3E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {68245366-420C-4162-B29C-2E1D6A4A3312}
