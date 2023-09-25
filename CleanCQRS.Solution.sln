@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MinimalSetup", "Examples\Mi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinimalSetupTests", "examples\MinimalSetupTests\MinimalSetupTests.csproj", "{951D14C1-8E43-45FB-A213-C4233FB14C92}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "minimal", "minimal", "{B139B123-D4A5-4C44-A982-F81EB1E2088D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,8 +36,9 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{BC5FE640-0CFE-45D1-8676-476E54BEFAC9} = {F20FD72C-705A-42DA-A625-F91C81D01E3E}
-		{951D14C1-8E43-45FB-A213-C4233FB14C92} = {F20FD72C-705A-42DA-A625-F91C81D01E3E}
+		{BC5FE640-0CFE-45D1-8676-476E54BEFAC9} = {B139B123-D4A5-4C44-A982-F81EB1E2088D}
+		{951D14C1-8E43-45FB-A213-C4233FB14C92} = {B139B123-D4A5-4C44-A982-F81EB1E2088D}
+		{B139B123-D4A5-4C44-A982-F81EB1E2088D} = {F20FD72C-705A-42DA-A625-F91C81D01E3E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {68245366-420C-4162-B29C-2E1D6A4A3312}
