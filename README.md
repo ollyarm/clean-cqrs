@@ -130,6 +130,7 @@ There are multiple of ways to set up your project but the basics are
 	- [/Examples/SimpleSetup/SimpleSetup.Web/Program.cs](/Examples/SimpleSetup/SimpleSetup.Web/Program.cs)
 3. Pipeline
 	- Similar to Simple but with a pipeline added
+    - [/Examples/PiplineSetup/PiplineSetup.Web/Program.cs](/Examples/PiplineSetup/PiplineSetup.Web/Program.cs)
 3. Composition
 	- The Unit Of Work is composed of all dependencies
 4. Isolated
