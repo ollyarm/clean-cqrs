@@ -127,6 +127,7 @@ There are multiple of ways to set up your project but the basics are
 2. Simple
 	- Project setup using Onion Architecture that constructs a unit of work from a provider and defines commands and queries with base classes.
 	- Web project as example entry point
+	- [/Examples/SimpleSetup/SimpleSetup.Web/Program.cs](/Examples/SimpleSetup/SimpleSetup.Web/Program.cs)
 3. Pipeline
 	- Similar to Simple but with a pipeline added
 3. Composition
