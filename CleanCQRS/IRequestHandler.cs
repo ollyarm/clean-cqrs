@@ -1,6 +1,6 @@
 ﻿namespace CleanCQRS;
 
-public interface IRequestHandler<TUnitOfWork, TRequest, TResponse>
+public interface IRequestHandler<in TUnitOfWork, in TRequest, TResponse>
 {
     Task<TResponse> Run(TUnitOfWork uow, TRequest request, CancellationToken cancellationToken);
 }
