@@ -1,0 +1,58 @@
+{
+	"info": {
+		"_postman_id": "a62491d6-6fa0-42fc-9f2f-9ed7173ba799",
+		"name": "CleanCQRS.ComposedSetup",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"message\": \"Example message\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{RootUrl}}/example",
+					"host": [
+						"{{RootUrl}}"
+					],
+					"path": [
+						"example"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{RootUrl}}/example",
+					"host": [
+						"{{RootUrl}}"
+					],
+					"path": [
+						"example"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "RootUrl",
+			"value": "https://localhost:7278"
+		}
+	]
+}
