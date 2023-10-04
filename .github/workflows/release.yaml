@@ -1,0 +1,65 @@
+name: Release
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+     - CleanCQRS/*
+    branches:
+    - "main"
+
+env:
+  VERSION_NUMBER: ${{ format('0.0.{0}{1}', github.run_number, github.ref != 'refs/heads/main' && '-preview' || '-beta')}}
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
+      pull-requests: write
+      statuses: write
+      checks: write
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 6.0.x
+      - name: Install dependencies
+        run: dotnet restore
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+      - name: Test
+        run: dotnet test --no-restore --verbosity normal --logger "trx;LogFileName=test-results.trx" --results-directory "test-results"
+      - name: Upload test results
+        uses: actions/upload-artifact@v3
+        with:
+          name: "test-results.trx"
+          path: test-results/test-results.trx
+        if: ${{ always() }}
+      - name: Test summary
+        uses: dorny/test-reporter@v1
+        with:
+          name: "Unit Tests"                  
+          path: 'test-results/test-results.trx'
+          reporter: dotnet-trx
+        if: ${{ always() }}
+      - name: Package
+        run: dotnet pack CleanCQRS/CleanCQRS.csproj --configuration Release --no-restore -o ./package --p:Version=${{env.VERSION_NUMBER}}
+      - name: Create Tag
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}  
+          script: |
+            const {VERSION_NUMBER} = process.env          
+            github.rest.git.createRef({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                ref: `refs/tags/${VERSION_NUMBER}`,
+                sha: context.sha
+            })
+      - name: Publish to NuGet
+        run: nuget push package/CleanCQRS.${{env.VERSION_NUMBER}}.nupkg -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{secrets.NUGET_API_KEY}}      
+      - name: Publish to GitHub
+        run: nuget push package/CleanCQRS.${{env.VERSION_NUMBER}}.nupkg -Source 'https://nuget.pkg.github.com/ollyarm/index.json' -ApiKey ${{secrets.GITHUB_TOKEN}}      
