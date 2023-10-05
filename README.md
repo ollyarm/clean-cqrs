@@ -136,6 +136,7 @@ There are multiple of ways to set up your project but the basics are
     - [/Examples/ComposedSetup/ComposedSetup.Web/Program.cs](/Examples/ComposedSetup/ComposedSetup.Web/Program.cs)
 4. Isolated
 	- Commands and Queries run against different interfaces meaning strict separation is type checked. The pipeline also behaves differently for commands and queries.
+    - [/Examples/IsolatedSetup/IsolatedSetup.Web/Program.cs](/Examples/IsolatedSetup/IsolatedSetup.Web/Program.cs)
 5. Barebones
 	- Absolute minimal setup but still uses Commands and Queries
 
