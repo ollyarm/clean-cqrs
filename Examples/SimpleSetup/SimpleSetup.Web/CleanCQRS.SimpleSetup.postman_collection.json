@@ -1,0 +1,101 @@
+{
+	"info": {
+		"_postman_id": "a62491d6-6fa0-42fc-9f2f-9ed7173ba799",
+		"name": "CleanCQRS.SimpleSetup",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create With Sync Dependency",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"message\": \"Example message\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{RootUrl}}/example",
+					"host": [
+						"{{RootUrl}}"
+					],
+					"path": [
+						"example"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read With Sync Dependency",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{RootUrl}}/example",
+					"host": [
+						"{{RootUrl}}"
+					],
+					"path": [
+						"example"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create With Async Dependency",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"message\" : \"A second example\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{RootUrl}}/example2",
+					"host": [
+						"{{RootUrl}}"
+					],
+					"path": [
+						"example2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read With Async Dependency",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{RootUrl}}/example2",
+					"host": [
+						"{{RootUrl}}"
+					],
+					"path": [
+						"example2"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "RootUrl",
+			"value": "https://localhost:7276"
+		}
+	]
+}

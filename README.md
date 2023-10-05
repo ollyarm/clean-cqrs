@@ -127,13 +127,18 @@ There are multiple of ways to set up your project but the basics are
 2. Simple
 	- Project setup using Onion Architecture that constructs a unit of work from a provider and defines commands and queries with base classes.
 	- Web project as example entry point
+	- [/Examples/SimpleSetup/SimpleSetup.Web/Program.cs](/Examples/SimpleSetup/SimpleSetup.Web/Program.cs)
 3. Pipeline
 	- Similar to Simple but with a pipeline added
+    - [/Examples/PiplineSetup/PiplineSetup.Web/Program.cs](/Examples/PiplineSetup/PiplineSetup.Web/Program.cs)
 3. Composition
 	- The Unit Of Work is composed of all dependencies
+    - [/Examples/ComposedSetup/ComposedSetup.Web/Program.cs](/Examples/ComposedSetup/ComposedSetup.Web/Program.cs)
 4. Isolated
 	- Commands and Queries run against different interfaces meaning strict separation is type checked. The pipeline also behaves differently for commands and queries.
+    - [/Examples/IsolatedSetup/IsolatedSetup.Web/Program.cs](/Examples/IsolatedSetup/IsolatedSetup.Web/Program.cs)
 5. Barebones
-	- Absolute minimal setup but still uses Commands and Queries
+	- Absolute minimal setup without unit of work but still uses Commands and Queries
+    - [/Examples/BarebonesSetup/Barebones.Console/Program.cs](/Examples/BarebonesSetup/Barebones.Console/Program.cs)
 
 
