@@ -9,7 +9,7 @@ on:
     - "main"
 
 env:
-  VERSION_NUMBER: ${{ format('0.0.{0}{1}', github.run_number, github.ref != 'refs/heads/main' && '-preview' || '-beta')}}
+  VERSION_NUMBER: ${{ format('1.0.{0}{1}', github.run_number, github.ref != 'refs/heads/main' && '-preview' || '')}}
 jobs:
   build:
 
