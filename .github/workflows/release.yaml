@@ -9,7 +9,7 @@ on:
     - "main"
 
 env:
-  VERSION_NUMBER: ${{ format('0.0.{0}{1}', github.run_number, github.ref != 'refs/heads/main' && '-preview' || '-beta')}}
+  VERSION_NUMBER: ${{ format('1.0.{0}{1}', github.run_number, github.ref != 'refs/heads/main' && '-preview' || '')}}
 jobs:
   build:
 
@@ -31,18 +31,18 @@ jobs:
       - name: Build
         run: dotnet build --configuration Release --no-restore
       - name: Test
-        run: dotnet test --no-restore --verbosity normal --logger "trx;LogFileName=test-results.trx" --results-directory "test-results"
+        run: dotnet test --no-restore --verbosity normal --logger "trx" --results-directory "test-results"
       - name: Upload test results
         uses: actions/upload-artifact@v3
         with:
           name: "test-results.trx"
-          path: test-results/test-results.trx
+          path: test-results/*
         if: ${{ always() }}
       - name: Test summary
         uses: dorny/test-reporter@v1
         with:
           name: "Unit Tests"                  
-          path: 'test-results/test-results.trx'
+          path: test-results/*
           reporter: dotnet-trx
         if: ${{ always() }}
       - name: Package
