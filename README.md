@@ -121,6 +121,8 @@ There are multiple of ways to set up your project but the basics are
 
 ### There are some examples and how to test them included here.
 
+Examples are all a bit contrived and simplistic but hopefully convey the power of this set up for testing and being able to change decisions in the future...
+
 1. Minimal
 	- Console app that constructs a unit of work and defines commands and queries with no base classes.
 	- [/Examples/MinimalSetup/MinimalSetup/Program.cs](/Examples/MinimalSetup/MinimalSetup/Program.cs)
@@ -140,5 +142,7 @@ There are multiple of ways to set up your project but the basics are
 5. Barebones
 	- Absolute minimal setup without unit of work but still uses Commands and Queries
     - [/Examples/BarebonesSetup/Barebones.Console/Program.cs](/Examples/BarebonesSetup/Barebones.Console/Program.cs)
-
+6. Synchronous
+	- Minimal setup only using sync methods as store is guarantied to be synchronous
+    - [/Examples/SyncSetup/Sync.Console/Program.cs](/Examples/SyncSetup/Sync.Console/Program.cs)
 
