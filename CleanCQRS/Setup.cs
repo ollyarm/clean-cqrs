@@ -9,7 +9,9 @@ public static class Setup
 {
     public static IServiceCollection AddCleanCQRS(this IServiceCollection services, params Assembly[] assemblies)
         => services
+            .AddTransient<ICQRSRequestHandlerProvider, CQRSRequestHandlerProvider>()
             .AddTransient<ICQRSRequestHandler, CQRSRequestHandler>()
+            .AddTransient(typeof(ICQRSRequestHandler<>), typeof(CQRSRequestHandler<>))
             .AddTransient<Func<ICQRSRequestHandler>>(ctx => () => ctx.GetRequiredService<ICQRSRequestHandler>())
             .AddHandlers(assemblies)
             ;

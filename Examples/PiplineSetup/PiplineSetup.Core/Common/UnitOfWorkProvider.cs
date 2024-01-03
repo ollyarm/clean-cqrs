@@ -6,14 +6,14 @@ using Interfaces;
 
 public class UnitOfWorkProvider : IUnitOfWorkProvider
 {
-    private readonly Func<ICQRSRequestHandler> _createRequestHandler;
+    private readonly ICQRSRequestHandlerProvider _createRequestHandlerProvider;
     private readonly IClock _clock;
 
-    public UnitOfWorkProvider(Func<ICQRSRequestHandler> createRequestHandler, IClock clock)
+    public UnitOfWorkProvider(ICQRSRequestHandlerProvider createRequestHandlerProvider, IClock clock)
     {
-        _createRequestHandler = createRequestHandler;
+        _createRequestHandlerProvider = createRequestHandlerProvider;
         _clock = clock;
     }
 
-    public IUnitOfWork Start() => new UnitOfWork(_createRequestHandler(), _clock);
+    public IUnitOfWork Start() => new UnitOfWork(_createRequestHandlerProvider.GetRequestHandler<IUnitOfWork>(), _clock);
 }
