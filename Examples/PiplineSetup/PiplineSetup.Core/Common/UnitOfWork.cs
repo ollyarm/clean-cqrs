@@ -6,9 +6,9 @@ using Interfaces;
 
 public class UnitOfWork : IUnitOfWork
 {
-    private ICQRSRequestHandler _requestHandler;
+    private ICQRSRequestHandler<IUnitOfWork> _requestHandler;
 
-    public UnitOfWork(ICQRSRequestHandler requestHandler, IClock clock)
+    public UnitOfWork(ICQRSRequestHandler<IUnitOfWork> requestHandler, IClock clock)
     {
         _requestHandler = requestHandler;
         Clock = clock;
@@ -18,9 +18,9 @@ public class UnitOfWork : IUnitOfWork
 
     public void Dispose() { }
 
-    public Task Run(ICommand command, CancellationToken cancellationToken) => _requestHandler.HandleCommand<IUnitOfWork>(this, command, cancellationToken);
+    public Task Run(ICommand command, CancellationToken cancellationToken) => _requestHandler.HandleCommand(this, command, cancellationToken);
 
-    public Task<T> Run<T>(ICommand<T> command, CancellationToken cancellationToken) => _requestHandler.HandleCommand<IUnitOfWork, T>(this, command, cancellationToken);
+    public Task<T> Run<T>(ICommand<T> command, CancellationToken cancellationToken) => _requestHandler.HandleCommand(this, command, cancellationToken);
 
-    public Task<T> Run<T>(IQuery<T> query, CancellationToken cancellationToken) => _requestHandler.HandleQuery<IUnitOfWork, T>(this, query, cancellationToken);
+    public Task<T> Run<T>(IQuery<T> query, CancellationToken cancellationToken) => _requestHandler.HandleQuery(this, query, cancellationToken);
 }

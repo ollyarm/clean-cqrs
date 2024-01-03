@@ -24,7 +24,7 @@ public class CQRSRequestHandler : ICQRSRequestHandler
         return HandleRequest<TUnitOfWork, TResponse>(uow, command, cancellationToken);
     }
 
-    private async Task<TResponse> HandleRequest<TUnitOfWork, TResponse>(TUnitOfWork uow, object request, CancellationToken cancellationToken)
+    protected async Task<TResponse> HandleRequest<TUnitOfWork, TResponse>(TUnitOfWork uow, object request, CancellationToken cancellationToken)
     {
         var requestType = request.GetType();
         var requestName = requestType.FullName;
@@ -44,34 +44,28 @@ public class CQRSRequestHandler : ICQRSRequestHandler
 
         return await wrappedHandler.Run(uow, request, cancellationToken);
     }
+}
 
-    /// <summary>
-    /// This class in needed to cast the IRequest<TResponse> request which is known at build time to the TRequest which is only known at run time
-    /// </summary>
-    /// <typeparam name="TRequest"></typeparam>
-    private class WrapperRequestHandler<TUnitOfWork, TRequest, TResponse> : IRunnable<TUnitOfWork, TResponse>
+public class CQRSRequestHandler<TUnitOfWork> : CQRSRequestHandler, ICQRSRequestHandler<TUnitOfWork>
+{
+    public CQRSRequestHandler(IServiceProvider serviceProvider)
+        : base(serviceProvider)
     {
-        private readonly IRequestHandler<TUnitOfWork, TRequest, TResponse> _handler;
-        private readonly IPipeline<TUnitOfWork, TRequest, TResponse>? _pipeline;
-
-        public WrapperRequestHandler(IRequestHandler<TUnitOfWork, TRequest, TResponse> handler, IPipeline<TUnitOfWork, TRequest, TResponse>? pipeline)
-        {
-            _handler = handler;
-            _pipeline = pipeline;
-        }
-
-        public Task<TResponse> Run(TUnitOfWork uow, object request, CancellationToken cancellationToken)
-        {
-            if (_pipeline == null)
-            {
-                return _handler.Run(uow, (TRequest)request, cancellationToken);
-            }
-            return _pipeline.Run(uow, (TRequest)request, _handler, cancellationToken);
-        }
     }
 
-    private interface IRunnable<TUnitOfWork, TResponse>
+    public Task HandleCommand(TUnitOfWork uow, ICommand command, CancellationToken cancellationToken)
     {
-        Task<TResponse> Run(TUnitOfWork uow, object request, CancellationToken cancellationToken);
+        return HandleRequest<TUnitOfWork, EmptyResult>(uow, command, cancellationToken);
+    }
+
+
+    public Task<TResponse> HandleCommand<TResponse>(TUnitOfWork uow, ICommand<TResponse> command, CancellationToken cancellationToken)
+    {
+        return HandleRequest<TUnitOfWork, TResponse>(uow, command, cancellationToken);
+    }
+
+    public Task<TResponse> HandleQuery<TResponse>(TUnitOfWork uow, IQuery<TResponse> query, CancellationToken cancellationToken)
+    {
+        return HandleRequest<TUnitOfWork, TResponse>(uow, query, cancellationToken);
     }
 }

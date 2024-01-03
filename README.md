@@ -81,16 +81,16 @@ There are multiple of ways to set up your project but the basics are
 
 ### 6. Implement your Unit of Work interface
 
-- Take a dependency on `ICQRSRequestHandler` and call this to run commands or queries 
+- Take a dependency on `ICQRSRequestHandler<IUnitOfWork>` and call this to run commands or queries 
  
 			public Task Run(ICommand command, CancellationToken cancellationToken) 
-				=> _requestHandler.HandleCommand<IUnitOfWork>(this, command, cancellationToken);`
+				=> _requestHandler.HandleCommand(this, command, cancellationToken);`
 
     		public Task<T> Run<T>(ICommand<T> command, CancellationToken cancellationToken) 
-				=> _requestHandler.HandleCommand<IUnitOfWork, T>(this, command, cancellationToken);`
+				=> _requestHandler.HandleCommand(this, command, cancellationToken);`
     
     		public Task<T> Run<T>(IQuery<T> query, CancellationToken cancellationToken) 
-				=> _requestHandler.HandleQuery<IUnitOfWork, T>(this, query, cancellationToken);
+				=> _requestHandler.HandleQuery(this, query, cancellationToken);
  
 - Its often good to add `IDisposable` to support `using(var uow = UnitOfWork()){}`
 

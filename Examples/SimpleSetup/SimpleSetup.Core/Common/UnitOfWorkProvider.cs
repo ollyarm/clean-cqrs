@@ -12,5 +12,6 @@ public class UnitOfWorkProvider : IUnitOfWorkProvider
     {
         _createRequestHandler = createRequestHandler;
     }
+
     public IUnitOfWork Start() => new UnitOfWork(_createRequestHandler());
 }
