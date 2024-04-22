@@ -21,6 +21,14 @@ public abstract class TestsBase
             ;
     }
 
+    [OneTimeTearDown]
+    public void OneTimeTearDown()
+    {
+        _serviceProvider?.Dispose();
+        _serviceProvider = null!;
+    }
+
+
     [SetUp]
     public void Setup()
     {
@@ -28,6 +36,13 @@ public abstract class TestsBase
         var provider = _serviceProvider.CreateScope().ServiceProvider;
         _store = provider.GetRequiredService<TestStore>();
         _uow = provider.GetRequiredService<IUnitOfWork>();
+    }
+
+    [TearDown]
+    public void TearDown()
+    {
+        _uow?.Dispose();
+        _uow = null!;
     }
 
     protected TestStore Store => _store;
