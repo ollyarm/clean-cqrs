@@ -27,6 +27,14 @@ public abstract class TestBase
             ;
     }
 
+    [OneTimeTearDown]
+    public void OneTimeTearDown()
+    {
+        ServiceProvider?.Dispose();
+        ServiceProvider = null!;
+    }
+
+
     [SetUp]
     public void Setup()
     {
@@ -36,6 +44,14 @@ public abstract class TestBase
         Uow = serviceProvider.GetRequiredService<IUnitOfWorkProvider>().Start();
         Clock = serviceProvider.GetRequiredService<FakeClock>();
     }
+
+    [TearDown]
+    public void TearDown()
+    {
+        Uow?.Dispose();
+        Uow = null!;
+    }
+
 }
 
 public static class TestBaseHelpers

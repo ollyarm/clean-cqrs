@@ -11,7 +11,7 @@ public abstract class TestBase
     protected TestStore TestStore { get; private set; }
     protected IUnitOfWork Uow { get; private set; }
 
-    public static IServiceProvider ServiceProvider { get; private set; } = default!; // Set in OneTimeSetUp
+    public static ServiceProvider ServiceProvider { get; private set; } = default!; // Set in OneTimeSetUp
 
     [OneTimeSetUp]
     public static void OneTimeSetUp()
@@ -25,6 +25,14 @@ public abstract class TestBase
             ;
     }
 
+    [OneTimeTearDown]
+    public void OneTimeTearDown()
+    {
+        ServiceProvider?.Dispose();
+        ServiceProvider = null!;
+    }
+
+
     [SetUp]
     public void Setup()
     {
@@ -33,4 +41,12 @@ public abstract class TestBase
         TestStore = provider.GetRequiredService<TestStore>();
         Uow = provider.GetRequiredService<IUnitOfWork>();
     }
+
+    [TearDown]
+    public void TearDown()
+    {
+        Uow?.Dispose();
+        Uow = null!;
+    }
+
 }

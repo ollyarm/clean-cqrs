@@ -12,12 +12,18 @@ public class ShouldContinueCommandTests : TestsBase
     [TestCase("no", ShouldContinueCommand.Result.No)]
     [TestCase("NO", ShouldContinueCommand.Result.No)]
     [TestCase("", ShouldContinueCommand.Result.Unknown)]
-    [TestCase(null, ShouldContinueCommand.Result.Unknown)]
     [TestCase("other", ShouldContinueCommand.Result.Unknown)]
     [TestCase("other value", ShouldContinueCommand.Result.Unknown)]
     public void ShouldContinueCommand_when_input_then_result_expected(string input, ShouldContinueCommand.Result expected)
     {
         var result = Run(new ShouldContinueCommand() { Input = input });
         Assert.That(result, Is.EqualTo(expected));
+    }
+
+    [Test]
+    public void ShouldContinueCommand_when_null_then_result_should_be_unknown()
+    {
+        var result = Run(new ShouldContinueCommand() { Input = null! });
+        Assert.That(result, Is.EqualTo(ShouldContinueCommand.Result.Unknown));
     }
 }

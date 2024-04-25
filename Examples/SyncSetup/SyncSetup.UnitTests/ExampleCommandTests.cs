@@ -16,7 +16,6 @@ public class ExampleCommandTests : TestsBase
         Assert.That(Store.Message, Is.EqualTo("Last run with message: 'Test Input'"));
     }
 
-    [TestCase((string?)null)]
     [TestCase("")]
     [TestCase("\n")]
     [TestCase(" ")]
@@ -28,6 +27,20 @@ public class ExampleCommandTests : TestsBase
         var command = new ExampleCommand()
         {
             Input = value
+        };
+
+        Run(command);
+
+        Assert.That(Store.Message, Is.EqualTo("Original"));
+    }
+
+    [Test]
+    public void ExampleCommand_when_null_then_input_is_not_stored()
+    {
+        Store.Message = "Original";
+        var command = new ExampleCommand()
+        {
+            Input = null!
         };
 
         Run(command);

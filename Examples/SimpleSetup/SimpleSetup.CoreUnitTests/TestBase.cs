@@ -25,6 +25,13 @@ public abstract class TestBase
             ;
     }
 
+    [OneTimeTearDown]
+    public void OneTimeTearDown()
+    {
+        ServiceProvider?.Dispose();
+        ServiceProvider = null!;
+    }
+
 
     [SetUp]
     public void Setup()
@@ -34,5 +41,12 @@ public abstract class TestBase
         FakeExampleStore = serviceProvider.GetRequiredService<FakeExampleStore>();
         Uow = serviceProvider.GetRequiredService<IUnitOfWorkProvider>().Start();
 
+    }
+
+    [TearDown]
+    public void TearDown()
+    {
+        Uow?.Dispose();
+        Uow = null!;
     }
 }
