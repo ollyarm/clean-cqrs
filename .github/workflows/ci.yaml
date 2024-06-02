@@ -19,9 +19,9 @@ jobs:
       statuses: write
       checks: write
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Setup .NET Core SDK
-        uses: actions/setup-dotnet@v3
+        uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 6.0.x
       - name: Install dependencies
@@ -31,7 +31,7 @@ jobs:
       - name: Test
         run: dotnet test --no-restore --verbosity normal --logger "trx" --results-directory "test-results"
       - name: Upload test results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: "test-results"
           path: test-results/*
