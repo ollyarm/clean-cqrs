@@ -4,10 +4,26 @@
     <TargetFrameworks>net6.0;net7.0;net8.0;</TargetFrameworks>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <Title>CleanCQRS</Title>
+    <Authors>Oliver Armfelt</Authors>
+    <Description>Implementation of CQRS along lines of Clean Architecture promoting Unit Of Work and transaction scope.</Description>
+    <PackageProjectUrl>https://github.com/ollyarm/clean-cqrs</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/ollyarm/clean-cqrs</RepositoryUrl>
+    <Copyright>Olvier Armfelt</Copyright>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageTags>cqrs; transaction;unit of work; uow; command; query;  .net;</PackageTags>
+    <PackageLicenseExpression> Apache-2.0</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
